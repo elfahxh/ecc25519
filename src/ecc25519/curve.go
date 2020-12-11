@@ -1,19 +1,22 @@
 package ecc25519
 
 import (
-	"curve25519"
-	"crypto/sha512"
+	"crypto/ed25519"
 	"crypto/rand"
+	"crypto/sha512"
 	"errors"
+
+	"golang.org/x/crypto/curve25519"
 )
 
 type Curve struct {
-	key [64]byte;
+	key ed25519.PrivateKey
+	pub ed25519.PublicKey
 	// 前32字节是私钥，后32字节是公钥，但是真正签名的时候，私钥是
 	// 整个 key 的 64 字节，所以不能只设置 32 字节私钥，必须同时设置 32 字节的公钥。
 	// 而验证签名的时候，只需要设置后 32 字节公钥
 
-	_public,_private [32]byte;
+	_public, _private [32]byte
 	//用于加密的私钥和公钥可以通过用于签名的密钥换算得到，这样就可以共用一套密钥
 }
 
@@ -48,9 +51,9 @@ func (cr *Curve) Encrypt(plainText []byte) ([]byte, error) {
 	curve25519.ScalarMult(&S, &r, &K_B)
 	k_E := sha512.Sum512(S[:])
 
-	srclen := len(plainText);
-	if srclen>64{
-		return nil,errors.New("source data is exceed 64 bytes");
+	srclen := len(plainText)
+	if srclen > 64 {
+		return nil, errors.New("source data is exceed 64 bytes")
 	}
 	cipherText := make([]byte, 32+srclen)
 	copy(cipherText[:32], R[:])

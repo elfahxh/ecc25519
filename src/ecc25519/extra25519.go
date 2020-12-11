@@ -1,11 +1,12 @@
-package ecc25519;
+package ecc25519
+
 // Copyright 2013 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 import (
 	"crypto/sha512"
-	"ed25519"
+	"ed21559test/ed25519"
 )
 
 // PrivateKeyToCurve25519 converts an ed25519 private key into a corresponding
@@ -208,37 +209,37 @@ func q58(out, z *ed25519.FieldElement) {
 	ed25519.FeMul(&t2, &t2, &t1) // 4,3,2,1
 	ed25519.FeMul(&t1, &t2, z)   // 4..0
 	ed25519.FeSquare(&t2, &t1)   // 5..1
-	for i = 1; i < 5; i++ {           // 9,8,7,6,5
+	for i = 1; i < 5; i++ {      // 9,8,7,6,5
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t1, &t2, &t1) // 9,8,7,6,5,4,3,2,1,0
 	ed25519.FeSquare(&t2, &t1)   // 10..1
-	for i = 1; i < 10; i++ {          // 19..10
+	for i = 1; i < 10; i++ {     // 19..10
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t2, &t2, &t1) // 19..0
 	ed25519.FeSquare(&t3, &t2)   // 20..1
-	for i = 1; i < 20; i++ {          // 39..20
+	for i = 1; i < 20; i++ {     // 39..20
 		ed25519.FeSquare(&t3, &t3)
 	}
 	ed25519.FeMul(&t2, &t3, &t2) // 39..0
 	ed25519.FeSquare(&t2, &t2)   // 40..1
-	for i = 1; i < 10; i++ {          // 49..10
+	for i = 1; i < 10; i++ {     // 49..10
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t1, &t2, &t1) // 49..0
 	ed25519.FeSquare(&t2, &t1)   // 50..1
-	for i = 1; i < 50; i++ {          // 99..50
+	for i = 1; i < 50; i++ {     // 99..50
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t2, &t2, &t1) // 99..0
 	ed25519.FeSquare(&t3, &t2)   // 100..1
-	for i = 1; i < 100; i++ {         // 199..100
+	for i = 1; i < 100; i++ {    // 199..100
 		ed25519.FeSquare(&t3, &t3)
 	}
 	ed25519.FeMul(&t2, &t3, &t2) // 199..0
 	ed25519.FeSquare(&t2, &t2)   // 200..1
-	for i = 1; i < 50; i++ {          // 249..50
+	for i = 1; i < 50; i++ {     // 249..50
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t1, &t2, &t1) // 249..0
@@ -261,42 +262,42 @@ func chi(out, z *ed25519.FieldElement) {
 	ed25519.FeMul(&t2, &t2, &t0) // 4,3,2,1
 	ed25519.FeMul(&t1, &t2, z)   // 4..0
 	ed25519.FeSquare(&t2, &t1)   // 5..1
-	for i = 1; i < 5; i++ {           // 9,8,7,6,5
+	for i = 1; i < 5; i++ {      // 9,8,7,6,5
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t1, &t2, &t1) // 9,8,7,6,5,4,3,2,1,0
 	ed25519.FeSquare(&t2, &t1)   // 10..1
-	for i = 1; i < 10; i++ {          // 19..10
+	for i = 1; i < 10; i++ {     // 19..10
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t2, &t2, &t1) // 19..0
 	ed25519.FeSquare(&t3, &t2)   // 20..1
-	for i = 1; i < 20; i++ {          // 39..20
+	for i = 1; i < 20; i++ {     // 39..20
 		ed25519.FeSquare(&t3, &t3)
 	}
 	ed25519.FeMul(&t2, &t3, &t2) // 39..0
 	ed25519.FeSquare(&t2, &t2)   // 40..1
-	for i = 1; i < 10; i++ {          // 49..10
+	for i = 1; i < 10; i++ {     // 49..10
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t1, &t2, &t1) // 49..0
 	ed25519.FeSquare(&t2, &t1)   // 50..1
-	for i = 1; i < 50; i++ {          // 99..50
+	for i = 1; i < 50; i++ {     // 99..50
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t2, &t2, &t1) // 99..0
 	ed25519.FeSquare(&t3, &t2)   // 100..1
-	for i = 1; i < 100; i++ {         // 199..100
+	for i = 1; i < 100; i++ {    // 199..100
 		ed25519.FeSquare(&t3, &t3)
 	}
 	ed25519.FeMul(&t2, &t3, &t2) // 199..0
 	ed25519.FeSquare(&t2, &t2)   // 200..1
-	for i = 1; i < 50; i++ {          // 249..50
+	for i = 1; i < 50; i++ {     // 249..50
 		ed25519.FeSquare(&t2, &t2)
 	}
 	ed25519.FeMul(&t1, &t2, &t1) // 249..0
 	ed25519.FeSquare(&t1, &t1)   // 250..1
-	for i = 1; i < 4; i++ {           // 253..4
+	for i = 1; i < 4; i++ {      // 253..4
 		ed25519.FeSquare(&t1, &t1)
 	}
 	ed25519.FeMul(out, &t1, &t0) // 253..4,2,1

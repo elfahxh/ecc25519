@@ -48,8 +48,6 @@ func GenerateKey(rand io.Reader) (publicKey *[PublicKeySize]byte, privateKey *[P
 	copy(privateKey[32:], publicKey[:])
 	return
 }
-
-// Sign signs the message with privateKey and returns a signature.
 func Sign(privateKey *[PrivateKeySize]byte, message []byte) *[SignatureSize]byte {
 	h := sha512.New()
 	h.Write(privateKey[:32])
